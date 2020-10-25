@@ -33,15 +33,19 @@ abstract class OAuthGrantType {
 class PasswordGrant extends OAuthGrantType {
   String username;
   String password;
-  List<String> scope = [];
+  List<String> scope;
 
-  PasswordGrant({this.username, this.password, this.scope});
+  PasswordGrant({this.username, this.password, scope}) : scope = scope ?? [];
 
   /// Prepare Request
   @override
   RequestOptions handle(RequestOptions request) {
     request.data =
-        "grant_type=password&username=${Uri.encodeComponent(username)}&password=${Uri.encodeComponent(password)}&scope=${this.scope.join(' ')}";
+        "grant_type=password&username=${Uri.encodeComponent(username)}&password=${Uri.encodeComponent(password)}";
+    
+    if (scope != null && scope.length > 0) {
+      request.data += "&scope=${Uri.encodeComponent(scope.join(' '))}";
+    }        
     return request;
   }
 }

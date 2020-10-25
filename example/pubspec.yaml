@@ -1,0 +1,8 @@
+name: example
+version: 1.0.0
+homepage: https://github.com/salomaosnff/oauth_dio
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
